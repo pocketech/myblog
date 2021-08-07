@@ -11,7 +11,7 @@ export type NextChakraLinkProps = PropsWithChildren<NextLinkProps & Omit<ChakraL
  * @see https://github.com/chakra-ui/chakra-ui/blob/main/examples/nextjs-typescript/components/NextChakraLink.tsx
  */
 //  Has to be a new component because both chakra and next share the `as` keyword
-export const NextChakraLink = ({
+export const NextChakraAnchor = ({
   href,
   as,
   replace,
