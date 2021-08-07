@@ -11,15 +11,31 @@ import {
   TagLabel,
   TagRightIcon,
 } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import type { InferGetStaticPropsType, NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { VscGithubInverted, VscMail, VscTwitter } from 'react-icons/vsc'
 
-import { Item } from '@/components/article/Item'
-import { NextChakraLink } from '@/components/common/NextChakraLink'
+import { NextChakraAnchor } from '@/components/NextChakraAnchor'
+import { Item } from '@/features/article'
+import { client } from '@/libs/client'
+import { DateFormat, dayjs } from '@/libs/dayjs'
 
-const Page: NextPage = () => {
+type Props = InferGetStaticPropsType<typeof getStaticProps>
+
+export const getStaticProps = async () => {
+  const data = await client.get<{ contents: { id: string; title: string; body: string }[] }>({
+    endpoint: 'articles',
+  })
+  return {
+    props: {
+      articles: data.contents,
+    },
+  }
+}
+
+const Page: NextPage<Props> = ({ articles }) => {
+  console.info(dayjs().format(DateFormat.DateHyphen))
   return (
     <Container maxW="container.lg">
       <Head>
@@ -60,13 +76,13 @@ const Page: NextPage = () => {
           <nav>
             <Stack as="ul" listStyleType="none">
               <li>
-                <NextChakraLink href="/articles"> Articles</NextChakraLink>
+                <NextChakraAnchor href="/articles"> Articles</NextChakraAnchor>
               </li>
               <li>
-                <NextChakraLink href="/works"> Works</NextChakraLink>
+                <NextChakraAnchor href="/works"> Works</NextChakraAnchor>
               </li>
               <li>
-                <NextChakraLink href="/contacts"> Privacy Policy</NextChakraLink>
+                <NextChakraAnchor href="/contacts"> Privacy Policy</NextChakraAnchor>
               </li>
             </Stack>
           </nav>
@@ -82,10 +98,19 @@ const Page: NextPage = () => {
         </Stack>
         <Divider orientation="vertical" display={{ base: 'none', md: 'block' }} />
         <Box bg="green" flexGrow={1}>
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+          <Stack spacing={4} as="ul" listStyleType="none">
+            {articles.map((article) => (
+              <chakra.li key={article.id}>
+                <Item
+                  body={article.body}
+                  title={article.title}
+                  date="2021/1/1"
+                  tag="マガジン"
+                  id={article.id}
+                />
+              </chakra.li>
+            ))}
+          </Stack>
         </Box>
       </Flex>
     </Container>
