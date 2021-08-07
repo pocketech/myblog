@@ -1,6 +1,15 @@
 import { Box, chakra, Flex, Image, Link, useColorModeValue } from '@chakra-ui/react'
 
-export const Item = () => {
+import { NextChakraAnchor } from '@/components/NextChakraAnchor'
+
+type Props = {
+  title: string
+  body: string
+  tag: string
+  date: string
+  id: string
+}
+export const Item: React.VFC<Props> = ({ title, body, tag, date, id }) => {
   return (
     <Flex
       bg={useColorModeValue('#F9FAFB', 'gray.600')}
@@ -20,7 +29,7 @@ export const Item = () => {
       >
         <Flex justifyContent="space-between" alignItems="center">
           <chakra.span fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-            Mar 10, 2019
+            {date}
           </chakra.span>
           <Link
             px={3}
@@ -32,12 +41,13 @@ export const Item = () => {
             rounded="md"
             _hover={{ bg: 'gray.500' }}
           >
-            Design
+            {tag}
           </Link>
         </Flex>
 
         <Box mt={2}>
-          <Link
+          <NextChakraAnchor
+            href={`/articles/${id}`}
             fontSize="2xl"
             color={useColorModeValue('gray.700', 'white')}
             fontWeight="700"
@@ -46,12 +56,10 @@ export const Item = () => {
               textDecor: 'underline',
             }}
           >
-            Accessibility tools for designers and developers
-          </Link>
+            {title}
+          </NextChakraAnchor>
           <chakra.p mt={2} color={useColorModeValue('gray.600', 'gray.300')}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam
-            aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus
-            delectus nihil quis facere in modi ratione libero!
+            {body}
           </chakra.p>
         </Box>
 
