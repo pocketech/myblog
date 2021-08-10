@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await page.goto(url, {
     timeout: 15 * 1000,
     // waitUntil option will make sure everything is loaded on the page
-    waitUntil: 'networkidle0',
+    waitUntil: 'domcontentloaded',
   })
   await page.evaluate(() => {
     const style = document.createElement('style')
