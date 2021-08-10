@@ -30,7 +30,12 @@ const Page: NextPage<Props> = ({ article }) => {
     <main>
       <h1>{article.title}</h1>
       <p>{article.publishedAt}</p>
-      <Text>OGPテスト</Text>
+      <Text>
+        OGPテスト
+        <span role="img" aria-label="ok">
+          🙆
+        </span>
+      </Text>
       <div
         dangerouslySetInnerHTML={{
           // eslint-disable-next-line @typescript-eslint/naming-convention
