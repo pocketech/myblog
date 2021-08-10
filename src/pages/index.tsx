@@ -19,7 +19,6 @@ import { VscGithubInverted, VscMail, VscTwitter } from 'react-icons/vsc'
 import { NextChakraAnchor } from '@/components/NextChakraAnchor'
 import { Item } from '@/features/article'
 import { client } from '@/libs/client'
-import { DateFormat, dayjs } from '@/libs/dayjs'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -35,7 +34,6 @@ export const getStaticProps = async () => {
 }
 
 const Page: NextPage<Props> = ({ articles }) => {
-  console.info(dayjs().format(DateFormat.DateHyphen))
   return (
     <Container maxW="container.lg">
       <Head>
