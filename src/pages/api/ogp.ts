@@ -1,25 +1,17 @@
 // path: /pages/api/open-graph-image.ts
-import chromium from 'chrome-aws-lambda'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import puppeteer from 'puppeteer-core'
+import playwright from 'playwright-aws-lambda'
 
 // getAbsoluteURL is in a snippet further down
 import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // Start the browser with the AWS Lambda wrapper (chrome-aws-lambda)
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: {
-      width: 1200,
-      height: 630,
-    },
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
-  })
-  // Create a page with the Open Graph image size best practise
-  // 1200x630 is a good size for most social media sites
-  const page = await browser.newPage()
+  const viewport = { width: 1200, height: 630 }
+  playwright.loadFont(
+    'https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf'
+  )
+  const browser = await playwright.launchChromium()
+  const page = await browser.newPage({ viewport })
   // Generate the full URL out of the given path (GET parameter)
   const relativeUrl = (req.query['path'] as string) || ''
   const url = getAbsoluteURL(relativeUrl)
@@ -27,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await page.goto(url, {
     timeout: 15 * 1000,
     // waitUntil option will make sure everything is loaded on the page
-    waitUntil: 'networkidle0',
+    waitUntil: 'networkidle',
   })
   const data = await page.screenshot({
     type: 'png',
