@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next'
 
 import type { Article } from '@/features/article'
@@ -7,7 +8,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const data = await client.get<{ contents: Article[] }>({ endpoint: 'articles' })
-  const paths = data.contents.map((content) => `/articles/${content.id}`)
+  const paths = data.contents.map((content) => `/articles/${content.id}/ogp`)
   return {
     paths,
     fallback: false,
@@ -29,6 +30,7 @@ const Page: NextPage<Props> = ({ article }) => {
     <main>
       <h1>{article.title}</h1>
       <p>{article.publishedAt}</p>
+      <Text>OGPテスト</Text>
       <div
         dangerouslySetInnerHTML={{
           // eslint-disable-next-line @typescript-eslint/naming-convention
