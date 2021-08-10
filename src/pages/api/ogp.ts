@@ -36,13 +36,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // waitUntil option will make sure everything is loaded on the page
     waitUntil: 'networkidle0',
   })
-  await page.evaluate(() => {
-    const style = document.createElement('style')
-    style.textContent = `
-        @import url('//fonts.googleapis.com/earlyaccess/notosansjp.css');`
-    document.head.appendChild(style)
-    document.body.style.fontFamily = "'Noto Sans JP', sans-serif"
-  })
   const data = await page.screenshot({
     type: 'png',
   })

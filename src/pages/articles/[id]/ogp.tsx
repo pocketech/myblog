@@ -28,7 +28,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 const Page: NextPage<Props> = ({ article }) => {
   return (
     <main>
-      <h1 style={{ fontFamily: "'Noto Sans JP', sans-serif" }}>{article.title}</h1>
+      <h1>{article.title}</h1>
       <p>{article.publishedAt}</p>
       <Text>
         OGPテスト
