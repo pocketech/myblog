@@ -1,5 +1,7 @@
 import type { DefaultSeoProps } from 'next-seo/lib/types'
 
+import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
+
 export const config: DefaultSeoProps = {
   title: 'Pocke-tech Blog',
   openGraph: {
@@ -7,6 +9,14 @@ export const config: DefaultSeoProps = {
     description: '技術ブログです。日々学んだことをアウトプットしていきます。',
     type: 'website',
     locale: 'ja_jp',
+    images: [
+      {
+        url: getAbsoluteURL('/og_image.jpg'),
+        width: 1200,
+        height: 630,
+        alt: 'default og image',
+      },
+    ],
     url: '/',
     // eslint-disable-next-line @typescript-eslint/naming-convention
     site_name: 'Pocke-tech Blog',
