@@ -743,6 +743,21 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/acme@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/acme/-/acme-4.5.0.tgz#922a3b49b311e3095d1aaab58cdd92b5281ce9ed"
+  integrity sha512-gyN3/QA0+qGfCLbMnGojctbZOAOr5L50kBb9cyqS06CGCafCTwnoAZXse74tSpmfCEgWav3qUx9cECaBCy196A==
+
+"@fontsource/m-plus-rounded-1c@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/m-plus-rounded-1c/-/m-plus-rounded-1c-4.5.0.tgz#cff45a53f932ce2ca4c65f4838fd0030e1aed762"
+  integrity sha512-1aEtf8LHAlihD4UrFI8rIhhBP/xZ62fvefKUqh5b1E+kcGYDOBSk6BaH3q0R7vmZHUjpjUCxrqIdt7GfUWc9yg==
+
+"@fontsource/noto-sans-jp@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-jp/-/noto-sans-jp-4.5.0.tgz#e9dbc9e3ccf37931da37cf932e6ceea7e1146499"
+  integrity sha512-BXe+enzyvI+iWYk7vr1cus0tc1wq8D7t08T1O5PuCZALJEYOPD3Knpl4ShVb6a9MXxaS25CjBhmc+r46uqyvpw==
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
