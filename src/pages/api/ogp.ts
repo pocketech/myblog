@@ -7,6 +7,9 @@ import puppeteer from 'puppeteer-core'
 import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  await chromium.font(
+    'https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf'
+  )
   await chromium.font('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap')
   await chromium.font(
     'https://github.com/googlefonts/noto-cjk/blob/main/Sans/OTF/Japanese/NotoSansCJKjp-Medium.otf'
