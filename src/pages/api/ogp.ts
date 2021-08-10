@@ -1,6 +1,7 @@
 // path: /pages/api/open-graph-image.ts
 import chromium from 'chrome-aws-lambda'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import path from 'path'
 import puppeteer from 'puppeteer-core'
 
 // getAbsoluteURL is in a snippet further down
@@ -10,10 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await chromium.font(
     'https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf'
   )
-  await chromium.font('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap')
-  await chromium.font(
-    'https://github.com/googlefonts/noto-cjk/blob/main/Sans/OTF/Japanese/NotoSansCJKjp-Medium.otf'
-  )
+  await chromium.font(path.resolve(process.cwd(), './assets/NotoSansJP-Medium.otf'))
   // Start the browser with the AWS Lambda wrapper (chrome-aws-lambda)
   const browser = await puppeteer.launch({
     args: chromium.args,
