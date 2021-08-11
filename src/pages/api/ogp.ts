@@ -5,7 +5,7 @@ import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await chromium.font(
-    'https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf'
+    'https://ghcdn.rawgit.org/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'
   )
   await chromium.font(
     'https://ghcdn.rawgit.org/googlefonts/noto-cjk/main/Sans/SubsetOTF/JP/NotoSansJP-Medium.otf'
