@@ -1,9 +1,6 @@
-// path: /pages/api/open-graph-image.ts
 import chromium from 'chrome-aws-lambda'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import puppeteer from 'puppeteer-core'
 
-// getAbsoluteURL is in a snippet further down
 import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     'https://ghcdn.rawgit.org/googlefonts/noto-cjk/main/Sans/SubsetOTF/JP/NotoSansJP-Medium.otf'
   )
   // Start the browser with the AWS Lambda wrapper (chrome-aws-lambda)
-  const browser = await puppeteer.launch({
+  const browser = await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: {
       width: 1200,
