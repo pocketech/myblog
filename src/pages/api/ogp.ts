@@ -10,9 +10,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await chromium.font(
     'https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf'
   )
-  await chromium.font('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap')
   await chromium.font(
-    'https://github.com/googlefonts/noto-cjk/blob/main/Sans/OTF/Japanese/NotoSansCJKjp-Medium.otf'
+    'https://ghcdn.rawgit.org/googlefonts/noto-cjk/main/Sans/SubsetOTF/JP/NotoSansJP-Medium.otf'
   )
   // Start the browser with the AWS Lambda wrapper (chrome-aws-lambda)
   const browser = await puppeteer.launch({
@@ -35,6 +34,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     timeout: 15 * 1000,
     // waitUntil option will make sure everything is loaded on the page
     waitUntil: 'networkidle0',
+  })
+  await page.evaluate(() => {
+    const style = document.createElement('style')
+    style.textContent = `
+        @import url('//fonts.googleapis.com/earlyaccess/notosansjp.css');`
+    document.head.appendChild(style)
+    document.body.style.fontFamily = "'Noto Sans JP', sans-serif"
   })
   const data = await page.screenshot({
     type: 'png',
