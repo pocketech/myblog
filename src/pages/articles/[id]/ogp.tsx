@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next'
 
 import type { Article } from '@/features/article'
@@ -27,22 +27,28 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
 const Page: NextPage<Props> = ({ article }) => {
   return (
-    <main>
-      <h1>{article.title}</h1>
-      <p>{article.publishedAt}</p>
-      <Text>
-        OGPテスト
-        <span role="img" aria-label="ok">
-          🙆
-        </span>
-      </Text>
-      <div
-        dangerouslySetInnerHTML={{
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          __html: `${article.body}`,
-        }}
-      />
-    </main>
+    <Flex
+      w="1200px"
+      h="630px"
+      bgGradient="linear(to-r, teal.500,green.500)"
+      align="center"
+      justify="center"
+      p="8"
+      direction="column"
+    >
+      <Stack spacing="4" p="6" boxShadow="lg" rounded="xl" w="full" h="full" bg="white" inset="">
+        <Heading as="h1" fontSize="7xl">
+          {article.title}
+        </Heading>
+        <p>{article.publishedAt}</p>
+        <Text>
+          OGPテスト
+          <span role="img" aria-label="ok">
+            🙆
+          </span>
+        </Text>
+      </Stack>
+    </Flex>
   )
 }
 export default Page
