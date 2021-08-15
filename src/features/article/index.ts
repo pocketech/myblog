@@ -1,2 +1,2 @@
-export * from './components/Item'
+export * from './components/Summary'
 export * from './types'

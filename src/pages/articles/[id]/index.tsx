@@ -1,8 +1,15 @@
-import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next'
+import { chakra } from '@chakra-ui/react'
+import type {
+  GetStaticPaths,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+  NextPageWithLayout,
+} from 'next'
 
 import { Head } from '@/components/Head'
 import { useOpenGraphImage } from '@/components/Head/useOpenGraphImage'
 import type { Article } from '@/features/article'
+import { BaseLayout } from '@/layouts/BaseLayout'
 import { client } from '@/libs/client'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
@@ -26,22 +33,22 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   }
 }
 
-const Page: NextPage<Props> = ({ article }) => {
+const Page: NextPageWithLayout<Props> = ({ article }) => {
   const { imageURL } = useOpenGraphImage()
   return (
     <>
       <Head ogTitle={article.title} ogDescription={article.body} ogImageUrl={imageURL} />
-      <main>
-        <h1>{article.title}</h1>
-        <p>{article.publishedAt}</p>
-        <div
-          dangerouslySetInnerHTML={{
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            __html: `${article.body}`,
-          }}
-        />
-      </main>
+      <chakra.h1 fontSize="6xl">{article.title}</chakra.h1>
+      <p>{article.publishedAt}</p>
+      <div
+        dangerouslySetInnerHTML={{
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          __html: `${article.body}`,
+        }}
+      />
     </>
   )
 }
+Page.getLayout = (page: React.ReactElement) => <BaseLayout>{page}</BaseLayout>
+
 export default Page

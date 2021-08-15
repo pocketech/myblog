@@ -1,18 +1,22 @@
 import { Box, chakra, Flex, Image, Link, useColorModeValue } from '@chakra-ui/react'
 
 import { NextChakraAnchor } from '@/components/NextChakraAnchor'
+import { DateFormat, dayjs } from '@/libs/dayjs'
 
-type Props = {
-  title: string
-  body: string
-  tag: string
-  date: string
-  id: string
-}
-export const Item: React.VFC<Props> = ({ title, body, tag, date, id }) => {
+import type { Article } from '../types'
+
+type Props = Pick<Article, 'title' | 'summary' | 'publishedAt' | 'revisedAt' | 'category' | 'id'>
+export const Summary: React.VFC<Props> = ({
+  title,
+  summary,
+  publishedAt,
+  revisedAt,
+  category,
+  id,
+}) => {
   return (
     <Flex
-      bg={useColorModeValue('#F9FAFB', 'gray.600')}
+      bg={useColorModeValue('white', 'gray.600')}
       p={50}
       w="full"
       alignItems="center"
@@ -29,7 +33,8 @@ export const Item: React.VFC<Props> = ({ title, body, tag, date, id }) => {
       >
         <Flex justifyContent="space-between" alignItems="center">
           <chakra.span fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-            {date}
+            公開日: {dayjs.utc(publishedAt).local().format(DateFormat.JpMonthDateTime)} 更新日:{' '}
+            {dayjs.utc(revisedAt).local().format(DateFormat.JpMonthDateTime)}
           </chakra.span>
           <Link
             px={3}
@@ -41,7 +46,7 @@ export const Item: React.VFC<Props> = ({ title, body, tag, date, id }) => {
             rounded="md"
             _hover={{ bg: 'gray.500' }}
           >
-            {tag}
+            {category.name}
           </Link>
         </Flex>
 
@@ -59,7 +64,7 @@ export const Item: React.VFC<Props> = ({ title, body, tag, date, id }) => {
             {title}
           </NextChakraAnchor>
           <chakra.p mt={2} color={useColorModeValue('gray.600', 'gray.300')}>
-            {body}
+            {summary}
           </chakra.p>
         </Box>
 
