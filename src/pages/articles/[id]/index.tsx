@@ -41,6 +41,7 @@ const Page: NextPageWithLayout<Props> = ({ article }) => {
       <chakra.h1 fontSize="6xl">{article.title}</chakra.h1>
       <p>{article.publishedAt}</p>
       <div
+        className="prose"
         dangerouslySetInnerHTML={{
           // eslint-disable-next-line @typescript-eslint/naming-convention
           __html: `${article.body}`,
