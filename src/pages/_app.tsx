@@ -7,10 +7,12 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../mocks')
 }
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const getLayout: (page: JSX.Element) => JSX.Element =
+    (Component as any).getLayout || ((page) => page)
   return (
     <ChakraProvider>
       <DefaultSeo {...config} />
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
     </ChakraProvider>
   )
 }
