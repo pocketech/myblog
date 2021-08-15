@@ -90,7 +90,7 @@ module.exports = {
     // pages配下とsbファイルのみdefault-exportを許容
     {
       files: ['src/pages/**/*.tsx', 'src/pages/**/*.ts', 'src/**/*.stories.@(js|jsx|ts|tsx)'],
-      rules: { 'import/no-default-export': 'off' },
+      rules: { 'import/no-default-export': 'off', 'react/display-name': 'off' },
     },
     // themeのセッティングでコンポーネント名のPascalCaseを許容
     {
