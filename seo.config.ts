@@ -24,7 +24,7 @@ export const config: DefaultSeoProps = {
   twitter: {
     handle: '@handle',
     site: '@site',
-    cardType: 'summary',
+    cardType: 'summary_large_image',
   },
   additionalMetaTags: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
