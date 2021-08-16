@@ -1,8 +1,10 @@
 import { Box, chakra, Flex, Stack, useBreakpointValue } from '@chakra-ui/react'
 
 import { formatDateFromUTC } from '@/libs/dayjs'
+import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 import type { Article } from '../types'
+import { Share } from './Share'
 import { TableOfContents } from './TableOfContents'
 
 type Props = {
@@ -30,9 +32,16 @@ export const Detail: React.VFC<Props> = ({ article }) => {
           />
         </Stack>
       </Box>
-      <Box>
-        {isLargerThanLg && <TableOfContents body={article.body} position="sticky" top="40" />}
-      </Box>
+      <div>
+        {isLargerThanLg && (
+          <Box position="sticky" top="40">
+            <Stack spacing="4">
+              <TableOfContents body={article.body} />
+              <Share url={getAbsoluteURL(`/articles/${article.id}`)} text={article.title} />
+            </Stack>
+          </Box>
+        )}
+      </div>
     </Flex>
   )
 }
