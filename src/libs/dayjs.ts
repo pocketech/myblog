@@ -27,7 +27,6 @@ export const DateFormat = {
   DateTimeSecondHyphen: 'YYYY-MM-DD H:mm:ss',
 } as const
 
-// export const formatDate = (date: string, format: keyof typeof DateFormat) => {
-//   if(dayjs(date).isValid()) return
-
-// }
+export const formatDateFromUTC = (utc: string, format: keyof typeof DateFormat) => {
+  return dayjs.utc(utc).local().format(DateFormat[format])
+}

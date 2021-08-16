@@ -1,7 +1,7 @@
-import { Box, chakra, Flex, Image, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, chakra, Flex, Link, useColorModeValue } from '@chakra-ui/react'
 
 import { NextChakraAnchor } from '@/components/NextChakraAnchor'
-import { DateFormat, dayjs } from '@/libs/dayjs'
+import { formatDateFromUTC } from '@/libs/dayjs'
 
 import type { Article } from '../types'
 
@@ -33,8 +33,8 @@ export const Summary: React.VFC<Props> = ({
       >
         <Flex justifyContent="space-between" alignItems="center">
           <chakra.span fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-            公開日: {dayjs.utc(publishedAt).local().format(DateFormat.JpMonthDateTime)} 更新日:{' '}
-            {dayjs.utc(revisedAt).local().format(DateFormat.JpMonthDateTime)}
+            公開日: {formatDateFromUTC(publishedAt, 'JpMonthDateTime')} / 更新日:{' '}
+            {formatDateFromUTC(revisedAt, 'JpMonthDateTime')}
           </chakra.span>
           <Link
             px={3}
@@ -63,39 +63,22 @@ export const Summary: React.VFC<Props> = ({
           >
             {title}
           </NextChakraAnchor>
-          <chakra.p mt={2} color={useColorModeValue('gray.600', 'gray.300')}>
+          <chakra.p
+            mt={2}
+            color={useColorModeValue('gray.600', 'gray.300')}
+            noOfLines={{ base: 4, md: 3 }}
+          >
             {summary}
           </chakra.p>
         </Box>
 
-        <Flex justifyContent="space-between" alignItems="center" mt={4}>
-          <Link
-            color={useColorModeValue('brand.600', 'brand.400')}
-            _hover={{ textDecor: 'underline' }}
-          >
-            Read more
-          </Link>
-
-          <Flex alignItems="center">
-            <Image
-              mx={4}
-              w={10}
-              h={10}
-              rounded="full"
-              fit="cover"
-              display={{ base: 'none', sm: 'block' }}
-              src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=40&q=80"
-              alt="avatar"
-            />
-            <Link
-              color={useColorModeValue('gray.700', 'gray.200')}
-              fontWeight="700"
-              cursor="pointer"
-            >
-              Khatab wedaa
-            </Link>
-          </Flex>
-        </Flex>
+        <NextChakraAnchor
+          color={useColorModeValue('green.600', 'green.400')}
+          _hover={{ textDecor: 'underline' }}
+          href={`/articles/${id}`}
+        >
+          Read more
+        </NextChakraAnchor>
       </Box>
     </Flex>
   )
