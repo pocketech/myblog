@@ -1,4 +1,3 @@
-import { chakra } from '@chakra-ui/react'
 import type {
   GetStaticPaths,
   GetStaticPropsContext,
@@ -9,6 +8,7 @@ import type {
 import { Head } from '@/components/Head'
 import { useOpenGraphImage } from '@/components/Head/useOpenGraphImage'
 import type { Article } from '@/features/article'
+import { Detail } from '@/features/article/components/Detail'
 import { BaseLayout } from '@/layouts/BaseLayout'
 import { client } from '@/libs/client'
 
@@ -38,15 +38,7 @@ const Page: NextPageWithLayout<Props> = ({ article }) => {
   return (
     <>
       <Head ogTitle={article.title} ogDescription={article.body} ogImageUrl={imageURL} />
-      <chakra.h1 fontSize="6xl">{article.title}</chakra.h1>
-      <p>{article.publishedAt}</p>
-      <div
-        className="prose"
-        dangerouslySetInnerHTML={{
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          __html: `${article.body}`,
-        }}
-      />
+      <Detail article={article} />
     </>
   )
 }
