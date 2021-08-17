@@ -8,7 +8,9 @@ type Props = InferGetStaticPropsType<typeof getStaticProps>
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const data = await client.get<{ contents: Article[] }>({ endpoint: 'articles' })
-  const paths = data.contents.map((content) => `/articles/${content.id}/ogp`)
+  const paths = data.contents.map((content) => ({
+    params: { id: content.id },
+  }))
   return {
     paths,
     fallback: false,
