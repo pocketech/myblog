@@ -8,7 +8,6 @@ type Props = {
 export const TableOfContents: React.VFC<Props> = ({ body, ...others }) => {
   const $ = cheerio.load(body)
   const headings = $('h2, h3').toArray()
-  console.info(headings)
   const toc = headings.map((heading) => ({
     text: (heading.children[0] as any).data,
     id: heading.attribs.id,
