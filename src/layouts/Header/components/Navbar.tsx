@@ -1,6 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react'
 
-import { ActiveAnchor } from './ActiveAnchor'
+import { ActiveLink } from './ActiveLink'
 
 const NAVIGATION = [
   {
@@ -28,13 +28,13 @@ export const NavBar: React.VFC = () => {
   return (
     <Flex justify="space-between" mx="1.5" as="nav">
       {NAVIGATION.map((item) => (
-        <ActiveAnchor href={item.href} key={item.href}>
+        <ActiveLink href={item.href} key={item.href} passHref>
           {(isActive) => (
-            <Button variant="ghost" bg={isActive ? 'gray.100' : 'inherit'} tabIndex={-1}>
+            <Button variant="ghost" bg={isActive ? 'gray.100' : 'inherit'} as="a">
               {item.caption}
             </Button>
           )}
-        </ActiveAnchor>
+        </ActiveLink>
       ))}
     </Flex>
   )
