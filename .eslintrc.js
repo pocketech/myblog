@@ -8,7 +8,7 @@ module.exports = {
   },
   settings: { react: { version: 'detect' } },
   env: { es2021: true, browser: true, jest: true, node: true },
-  plugins: ['@typescript-eslint', 'import', 'simple-import-sort'],
+  plugins: ['@typescript-eslint', 'import', 'simple-import-sort', 'unused-imports'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -16,8 +16,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
-    'next',
-    'next/core-web-vitals',
+    'plugin:@next/next/recommended',
     'prettier',
   ],
   rules: {
@@ -50,12 +49,13 @@ module.exports = {
         checkInlineFunction: true,
       },
     ],
+    // <Component {...props}>を許可する
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-array-index-key': 'warn',
     // React Hooks のための設定
     'react-hooks/rules-of-hooks': 'error',
     // hooksの依存配列の設定
     'react-hooks/exhaustive-deps': 'warn',
-    // <Component {...props}>を許可する
-    'react/jsx-props-no-spreading': 'off',
     'react/no-unescaped-entities': 'off',
     'import/newline-after-import': 'error',
     // default-exportを許容しない
@@ -69,8 +69,14 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     // 型は明示的にtype-importする
     '@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'type-imports' }],
+    // unused-imports/no-unused-varsと競合するためoff
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
     // 未使用の変数がある場合エラーにする（デフォルトは warning）
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'unused-imports/no-unused-vars': [
+      'error',
+      { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+    ],
     // next/linkのchildのaタグの空hrefを許容する
     'jsx-a11y/anchor-is-valid': 'off',
     // 命名に関するルール
@@ -79,10 +85,22 @@ module.exports = {
       { selector: ['typeAlias', 'typeParameter'], format: ['PascalCase'] },
       { selector: ['property', 'parameterProperty', 'method'], format: ['camelCase'] },
       {
-        selector: 'variable',
+        selector: ['variable'],
         types: ['boolean'],
         format: ['PascalCase'],
-        prefix: ['is', 'has', 'should'],
+        prefix: ['is', 'has', 'should', 'can'],
+      },
+      {
+        selector: ['variable'],
+        types: ['string', 'number', 'array'],
+        modifiers: ['const'],
+        format: ['camelCase', 'UPPER_CASE'],
+      },
+      {
+        selector: ['typeProperty'],
+        types: ['boolean'],
+        format: ['PascalCase'],
+        prefix: ['is', 'has', 'should', 'can'],
       },
     ],
   },
