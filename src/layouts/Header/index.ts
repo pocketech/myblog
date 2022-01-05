@@ -1,2 +1,1 @@
-export * from './components/MobileHeader'
-export * from './components/PCHeader'
+export * from './components/Header'

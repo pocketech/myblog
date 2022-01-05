@@ -1,41 +1,41 @@
-import { Button, Flex } from '@chakra-ui/react'
+import type { ButtonGroupProps } from '@chakra-ui/react'
+import { Icon } from '@chakra-ui/react'
+import { Button, ButtonGroup } from '@chakra-ui/react'
 
+import { NAVIGATION } from '../constants'
 import { ActiveLink } from './ActiveLink'
 
-const NAVIGATION = [
-  {
-    caption: 'HOME',
-    href: '/',
-  },
-  {
-    caption: 'ABOUT',
-    href: '/about',
-  },
-  {
-    caption: 'WORKS',
-    href: '/works',
-  },
-  {
-    caption: 'CONTACT',
-    href: '/contact',
-  },
-]
+type Props = { size: 'sm' | 'md' } & Pick<ButtonGroupProps, 'ml' | 'mr' | 'display'>
+
+const SPACING_SCALE: { [P in Props['size']]: string } = {
+  sm: '0.5',
+  md: '1.5',
+}
+const ICON_SCALE: { [P in Props['size']]: string } = {
+  sm: '4',
+  md: '5',
+}
 
 /**
  * @package
  */
-export const NavBar: React.VFC = () => {
+export const NavBar: React.VFC<Props> = ({ size = 'md', ...buttonGroupProps }) => {
   return (
-    <Flex justify="space-between" mx="1.5" as="nav">
+    <ButtonGroup spacing={SPACING_SCALE[size]} size={size} as="nav" {...buttonGroupProps}>
       {NAVIGATION.map((item) => (
-        <ActiveLink href={item.href} key={item.href} passHref>
+        <ActiveLink href={item.href} rootPath="/" key={item.href.pathname} passHref>
           {(isActive) => (
-            <Button variant="ghost" bg={isActive ? 'gray.100' : 'inherit'} as="a">
-              {item.caption}
+            <Button
+              as="a"
+              variant="ghost"
+              leftIcon={<Icon as={item.icon} boxSize={ICON_SCALE[size]} />}
+              isActive={isActive}
+            >
+              {item.name}
             </Button>
           )}
         </ActiveLink>
       ))}
-    </Flex>
+    </ButtonGroup>
   )
 }

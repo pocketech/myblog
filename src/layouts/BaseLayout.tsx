@@ -1,24 +1,41 @@
-import { Box, useBreakpointValue } from '@chakra-ui/react'
+import { chakra } from '@chakra-ui/react'
 
 import { Footer } from './Footer'
-import { MobileHeader, PCHeader } from './Header'
+import { Header } from './Header'
+import { TabBar } from './Header/components/Tabbar'
 
 export const BaseLayout: React.FC = ({ children }) => {
   return (
-    <Box minH="100vh" display="flex" flexDirection="column" justifyContent="space-between">
-      {useBreakpointValue({ lg: true }) ? <PCHeader /> : <MobileHeader />}
+    <>
+      <style jsx global>
+        {`
+          html {
+            height: 100%;
+          }
+          body {
+            display: flex;
+            flex-direction: column;
+          }
+          #__next {
+            display: contents;
+          }
+        `}
+      </style>
 
-      <Box
+      <Header position={{ lg: 'sticky' }} top="0" zIndex="sticky" />
+
+      <chakra.main
+        flex="1"
         py="4"
         px={{ base: 4, sm: 6, lg: 8 }}
         // Container styles
         maxW={{ base: '7xl', sm: '8xl' }}
         mx="auto"
       >
-        <main>{children}</main>
-      </Box>
-
+        {children}
+      </chakra.main>
       <Footer />
-    </Box>
+      <TabBar display={{ base: 'flex', lg: 'none' }} position="sticky" bottom="0" zIndex="sticky" />
+    </>
   )
 }
