@@ -6,9 +6,11 @@
     "npm": "npmではなくyarnを使用してください"
   },
   "scripts": {
-    "dev": "next dev -p 3036",
+    "dev": "run-p dev:*",
+    "dev:next": "NODE_OPTIONS='--inspect' next dev -p 3035",
+    "dev:path": "pathpida --ignorePath .gitignore --watch --output src/libs",
     "package-update": "yarn upgrade-interactive --latest",
-    "build": "next build",
+    "build": "pathpida --ignorePath .gitignore --output src/libs && next build",
     "start": "next start",
     "test": "jest --watch",
     "lint": "run-p -l -c --aggregate-output lint:*",
@@ -43,6 +45,7 @@
     "react-share": "^4.4.0"
   },
   "devDependencies": {
+    "@chakra-ui/cli": "^1.7.0",
     "@next/eslint-plugin-next": "^12.0.7",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
