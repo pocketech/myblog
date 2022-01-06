@@ -2,10 +2,8 @@
 import Dayjs from 'dayjs'
 import ja from 'dayjs/locale/ja'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import utc from 'dayjs/plugin/utc'
 
 Dayjs.locale(ja)
-Dayjs.extend(utc)
 Dayjs.extend(relativeTime)
 
 export const dayjs = Dayjs
@@ -28,5 +26,5 @@ export const DateFormat = {
 } as const
 
 export const formatDateFromUTC = (utc: string, format: keyof typeof DateFormat) => {
-  return dayjs.utc(utc).local().format(DateFormat[format])
+  return dayjs(utc).format(DateFormat[format])
 }

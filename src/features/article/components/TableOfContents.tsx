@@ -1,10 +1,11 @@
 import type { BoxProps } from '@chakra-ui/react'
-import { Box, Stack, Text } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import cheerio from 'cheerio'
 
 type Props = {
   body: string
 } & BoxProps
+
 export const TableOfContents: React.VFC<Props> = ({ body, ...others }) => {
   const $ = cheerio.load(body)
   const headings = $('h2, h3').toArray()
@@ -13,9 +14,10 @@ export const TableOfContents: React.VFC<Props> = ({ body, ...others }) => {
     id: heading.attribs.id,
     name: heading.name,
   }))
+
   return (
-    <Box bg="gray.50" p="6" rounded="md" height="min" {...others}>
-      <Text fontWeight="bold">目次</Text>
+    <Stack spacing="4" bg="gray.50" p="6" rounded="md" height="min" {...others}>
+      <Box fontWeight="bold">目次</Box>
       <Stack as="ul">
         {toc.map((item) => (
           <Box as="li" key={item.id}>
@@ -23,6 +25,6 @@ export const TableOfContents: React.VFC<Props> = ({ body, ...others }) => {
           </Box>
         ))}
       </Stack>
-    </Box>
+    </Stack>
   )
 }

@@ -1,7 +1,7 @@
 import { Box, chakra, Flex, Image, Link, useColorModeValue } from '@chakra-ui/react'
 
 import { NextChakraAnchor } from '@/components/NextChakraAnchor'
-import { DateFormat, dayjs } from '@/libs/dayjs'
+import { formatDateFromUTC } from '@/libs/dayjs'
 
 import type { Article } from '../types'
 
@@ -33,8 +33,8 @@ export const Summary: React.VFC<Props> = ({
       >
         <Flex justifyContent="space-between" alignItems="center">
           <chakra.span fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-            公開日: {dayjs.utc(publishedAt).local().format(DateFormat.JpMonthDateTime)} 更新日:{' '}
-            {dayjs.utc(revisedAt).local().format(DateFormat.JpMonthDateTime)}
+            公開日: {formatDateFromUTC(publishedAt, 'JpMonthDateTime')} 更新日:{' '}
+            {formatDateFromUTC(revisedAt, 'JpMonthDateTime')}
           </chakra.span>
           <Link
             px={3}

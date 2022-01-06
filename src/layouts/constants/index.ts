@@ -1,3 +1,4 @@
-import type { SpaceProps } from '@chakra-ui/react'
-
-export const GUTTER: SpaceProps['px'] = { base: 4, sm: 6, '2xl': 16 }
+/**
+ * レイアウトのための溝を定義
+ */
+export const GUTTER = { base: '4', sm: '6', '2xl': '16' }

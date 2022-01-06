@@ -5,11 +5,12 @@ import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } fr
 type Props = {
   text: string
   url: string
-} & FlexProps
+  iconSpacing?: FlexProps['gridGap']
+} & Pick<FlexProps, 'alignSelf'>
 
-export const Share: React.VFC<Props> = ({ text, url, ...others }) => {
+export const Share: React.VFC<Props> = ({ text, url, iconSpacing = '8', ...others }) => {
   return (
-    <Flex justify="center" gridGap="8" {...others}>
+    <Flex gridGap={iconSpacing} {...others}>
       <TwitterShareButton url={url} title={text}>
         <TwitterIcon size={32} round={true} />
       </TwitterShareButton>
