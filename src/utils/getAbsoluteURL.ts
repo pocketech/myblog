@@ -4,7 +4,7 @@ export const getAbsoluteURL = (relativePath: string) => {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3036'
       : process.env.NODE_ENV === 'production' && process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
+      ? 'https://pocke-tech-blog.vercel.app'
       : 'http://localhost:3000'
   return baseURL + relativePath
 }
