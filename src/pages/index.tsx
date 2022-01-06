@@ -1,4 +1,4 @@
-import { chakra, Container, Stack } from '@chakra-ui/react'
+import { chakra, Stack } from '@chakra-ui/react'
 import type { InferGetStaticPropsType, NextPageWithLayout } from 'next'
 
 import type { Articles } from '@/features/article'
@@ -21,17 +21,17 @@ export const getStaticProps = async () => {
 
 const Page: NextPageWithLayout<Props> = ({ articles }) => {
   return (
-    <Container maxW="container.lg">
-      <Stack spacing={4} as="ul" listStyleType="none">
-        {articles.map((article) => (
-          <chakra.li key={article.id}>
-            <Summary {...article} />
-          </chakra.li>
-        ))}
-      </Stack>
-    </Container>
+    <Stack spacing="4" as="ul" listStyleType="none">
+      {articles.map((article) => (
+        <chakra.li key={article.id}>
+          <Summary {...article} />
+        </chakra.li>
+      ))}
+    </Stack>
   )
 }
-Page.getLayout = (page: React.ReactElement) => <BaseLayout>{page}</BaseLayout>
+Page.getLayout = (page: React.ReactElement) => (
+  <BaseLayout contentWidth="container.lg">{page}</BaseLayout>
+)
 
 export default Page

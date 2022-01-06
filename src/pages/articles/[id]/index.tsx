@@ -44,6 +44,8 @@ const Page: NextPageWithLayout<Props> = ({ article }) => {
     </>
   )
 }
-Page.getLayout = (page: React.ReactElement) => <BaseLayout>{page}</BaseLayout>
+Page.getLayout = (page: React.ReactElement) => (
+  <BaseLayout contentWidth="container.xl">{page}</BaseLayout>
+)
 
 export default Page

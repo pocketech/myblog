@@ -1,10 +1,16 @@
+import type { LayoutProps } from '@chakra-ui/react'
 import { chakra } from '@chakra-ui/react'
 
+import { GUTTER } from './constants'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { TabBar } from './Header/components/Tabbar'
 
-export const BaseLayout: React.FC = ({ children }) => {
+type Props = {
+  contentWidth?: LayoutProps['maxW']
+}
+
+export const BaseLayout: React.FC<Props> = ({ children, contentWidth }) => {
   return (
     <>
       <style jsx global>
@@ -24,14 +30,7 @@ export const BaseLayout: React.FC = ({ children }) => {
 
       <Header position={{ lg: 'sticky' }} top="0" zIndex="sticky" />
 
-      <chakra.main
-        flex="1"
-        py="4"
-        px={{ base: 4, sm: 6, lg: 8 }}
-        // Container styles
-        maxW={{ base: '7xl', sm: '8xl' }}
-        mx="auto"
-      >
+      <chakra.main maxW={contentWidth} mt="8" flex="1" px={{ ...GUTTER, '2xl': 0 }} mx="auto">
         {children}
       </chakra.main>
       <Footer />
