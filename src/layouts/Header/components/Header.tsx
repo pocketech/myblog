@@ -1,10 +1,11 @@
 import type { PositionProps } from '@chakra-ui/react'
 import { useBreakpointValue } from '@chakra-ui/react'
 import { chakra, Flex } from '@chakra-ui/react'
-import Link from 'next/dist/client/link'
+import NextLink from 'next/link'
 
 import { Logo } from '@/components/Logo'
 import { GUTTER } from '@/layouts/constants'
+import { pagesPath } from '@/libs/$path'
 
 import { NavBar } from './Navbar'
 import { SocialIcons } from './SocialIcons'
@@ -17,11 +18,11 @@ export const Header: React.VFC<Props> = ({ ...positionProps }) => {
     <chakra.header borderBottomWidth="thin" bgColor="white" px={GUTTER} {...positionProps}>
       <Flex alignItems="center">
         <Flex alignItems="center" gridGap="4">
-          <Link href="/">
+          <NextLink href={pagesPath.$url()}>
             <a>
               <Logo width={{ base: '48', sm: '64' }} />
             </a>
-          </Link>
+          </NextLink>
           <NavBar
             size={isLargerThan2xl ? 'md' : 'sm'}
             display={{ base: 'none', lg: 'initial' }}
