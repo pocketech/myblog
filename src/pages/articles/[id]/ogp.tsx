@@ -1,8 +1,11 @@
-import { Flex, Heading, Stack, Text } from '@chakra-ui/react'
+import { Box, Center, Flex } from '@chakra-ui/react'
 import type { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType, NextPage } from 'next'
 
+import { Logo } from '@/components/Logo'
+import { OGP_IMAGE_SIZE } from '@/constants/ogpImageSize'
 import type { Article } from '@/features/article'
 import { client } from '@/libs/client'
+import { formatDateFromUTC } from '@/libs/dayjs'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -29,28 +32,26 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
 const Page: NextPage<Props> = ({ article }) => {
   return (
-    <Flex
-      w="1200px"
-      h="630px"
+    <Center
+      w={`${OGP_IMAGE_SIZE.width}px`}
+      h={`${OGP_IMAGE_SIZE.height}px`}
       bgGradient="linear(to-r, teal.500,green.500)"
-      align="center"
-      justify="center"
       p="8"
-      direction="column"
     >
-      <Stack spacing="4" p="6" boxShadow="lg" rounded="xl" w="full" h="full" bg="white" inset="">
-        <Heading as="h1" fontSize="7xl">
+      <Flex flexDir="column" p="6" boxShadow="lg" rounded="xl" w="full" h="full" bg="white">
+        <Box as="h1" fontSize="7xl" fontWeight="bold">
           {article.title}
-        </Heading>
-        <p>{article.publishedAt}</p>
-        <Text>
-          OGPテスト
-          <span role="img" aria-label="ok">
-            🙆
-          </span>
-        </Text>
-      </Stack>
-    </Flex>
+        </Box>
+        <Box textColor="gray.700" fontSize="xl" mt="4">
+          {formatDateFromUTC(article.publishedAt, 'JpDateTime')}
+        </Box>
+        <Box as="p" fontSize="3xl" mt="4">
+          {article.summary}
+        </Box>
+        {/* 右下寄せ */}
+        <Logo ml="auto" mt="auto" />
+      </Flex>
+    </Center>
   )
 }
 export default Page
