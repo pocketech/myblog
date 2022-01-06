@@ -1,5 +1,7 @@
 import { NextSeo } from 'next-seo'
 
+import { OGP_IMAGE_SIZE } from '@/constants/ogpImageSize'
+
 type Props = {
   ogTitle: string
   ogDescription: string
@@ -13,8 +15,8 @@ export const Head: React.VFC<Props> = ({ ogTitle, ogDescription, ogImageUrl }) =
         images: [
           {
             url: ogImageUrl,
-            width: 1200,
-            height: 630,
+            width: OGP_IMAGE_SIZE.width,
+            height: OGP_IMAGE_SIZE.height,
             alt: 'og image',
           },
         ],

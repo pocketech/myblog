@@ -1,6 +1,7 @@
 import chromium from 'chrome-aws-lambda'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { OGP_IMAGE_SIZE } from '@/constants/ogpImageSize'
 import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,8 +15,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const browser = await chromium.puppeteer.launch({
     args: chromium.args,
     defaultViewport: {
-      width: 1200,
-      height: 630,
+      width: OGP_IMAGE_SIZE.width,
+      height: OGP_IMAGE_SIZE.height,
     },
     executablePath: await chromium.executablePath,
     headless: chromium.headless,

@@ -1,5 +1,6 @@
 import type { DefaultSeoProps } from 'next-seo/lib/types'
 
+import { OGP_IMAGE_SIZE } from '@/constants/ogpImageSize'
 import { getAbsoluteURL } from '@/utils/getAbsoluteURL'
 
 export const config: DefaultSeoProps = {
@@ -12,8 +13,8 @@ export const config: DefaultSeoProps = {
     images: [
       {
         url: getAbsoluteURL('/og_image.jpg'),
-        width: 1200,
-        height: 630,
+        width: OGP_IMAGE_SIZE.width,
+        height: OGP_IMAGE_SIZE.height,
         alt: 'default og image',
       },
     ],
