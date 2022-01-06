@@ -7,8 +7,5 @@ export const global = (_props: GlobalStyleProps): CSSObject => {
     body: {
       textColor: 'gray.900',
     },
-    li: {
-      listStyleType: 'none',
-    },
   }
 }
