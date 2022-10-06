@@ -1,1 +1,1 @@
-export * from './NextChakraAnchor'
+export * from "./NextChakraAnchor";

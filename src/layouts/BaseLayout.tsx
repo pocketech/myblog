@@ -1,40 +1,60 @@
-import type { LayoutProps } from '@chakra-ui/react'
-import { chakra } from '@chakra-ui/react'
+import type { LayoutProps } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { Global } from "@emotion/react";
 
-import { GUTTER } from './constants'
-import { Footer } from './Footer'
-import { Header } from './Header'
-import { TabBar } from './Header/components/Tabbar'
+import { GUTTER } from "./constants";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { TabBar } from "./Header/components/Tabbar";
 
 type Props = {
-  contentWidth?: LayoutProps['maxW']
-}
+  contentWidth?: LayoutProps["maxW"];
+  children: React.ReactNode;
+};
 
 export const BaseLayout: React.FC<Props> = ({ children, contentWidth }) => {
   return (
     <>
-      <style jsx global>
-        {`
-          html {
-            height: 100%;
-          }
-          body {
-            display: flex;
-            flex-direction: column;
-          }
-          #__next {
-            display: contents;
-          }
-        `}
-      </style>
+      <Global
+        styles={{
+          html: {
+            height: "100%",
+          },
+          body: {
+            display: "flex",
+            flexDirection: "column",
+          },
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          "#__next": {
+            display: "contents",
+          },
+        }}
+      />
 
-      <Header position={{ lg: 'sticky' }} top="0" zIndex="sticky" />
+      <Header
+        position={{ lg: "sticky" }}
+        top="0"
+        zIndex="sticky"
+      />
 
-      <chakra.main maxW={contentWidth} mt="8" flex="1" px={{ ...GUTTER, '2xl': 0 }} mx="auto">
+      <Container
+        as="main"
+        maxW={contentWidth}
+        mt="8"
+        flex="1"
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        px={{ ...GUTTER, "2xl": 0 }}
+        mx="auto"
+      >
         {children}
-      </chakra.main>
+      </Container>
       <Footer />
-      <TabBar display={{ base: 'flex', lg: 'none' }} position="sticky" bottom="0" zIndex="sticky" />
+      <TabBar
+        display={{ base: "flex", lg: "none" }}
+        position="sticky"
+        bottom="0"
+        zIndex="sticky"
+      />
     </>
-  )
-}
+  );
+};

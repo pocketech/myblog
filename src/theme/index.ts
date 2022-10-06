@@ -1,13 +1,13 @@
 // Theme
-import type { ChakraTheme } from '@chakra-ui/react'
-import { extendTheme } from '@chakra-ui/react'
+import type { ChakraTheme } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 
 // Component style overrides
-import { Button, Link } from './components'
+import { Button, Link } from "./components";
 // Global style overrides
-import { global } from './global'
+import { global } from "./global";
 // Text style overrides
-import { textStyles } from './styles/textStyles'
+import { textStyles } from "./styles/textStyles";
 
 export const themeOverrides: Partial<ChakraTheme> = {
   textStyles,
@@ -16,5 +16,5 @@ export const themeOverrides: Partial<ChakraTheme> = {
     Button,
     Link,
   },
-}
-export const theme = extendTheme(themeOverrides)
+};
+export const theme = extendTheme(themeOverrides);

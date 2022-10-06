@@ -1,12 +1,15 @@
-import { Box, chakra, Flex, Link, useColorModeValue } from '@chakra-ui/react'
+import { Box, chakra, Flex, Link, useColorModeValue } from "@chakra-ui/react";
 
-import { NextChakraAnchor } from '@/components/NextChakraAnchor'
-import { formatDateFromUTC } from '@/libs/dayjs'
+import { NextChakraAnchor } from "@/components/NextChakraAnchor";
+import { formatDateFromUTC } from "@/libs/dayjs";
 
-import type { Article } from '../types'
+import type { Article } from "../types";
 
-type Props = Pick<Article, 'title' | 'summary' | 'publishedAt' | 'revisedAt' | 'category' | 'id'>
-export const Summary: React.VFC<Props> = ({
+type Props = Pick<
+  Article,
+  "title" | "summary" | "publishedAt" | "revisedAt" | "category" | "id"
+>;
+export const Summary: React.FC<Props> = ({
   title,
   summary,
   publishedAt,
@@ -15,11 +18,23 @@ export const Summary: React.VFC<Props> = ({
   id,
 }) => {
   return (
-    <Box px="8" py="4" rounded="lg" shadow="lg" bg={useColorModeValue('white', 'gray.800')}>
-      <Flex justifyContent="space-between" alignItems="center">
-        <chakra.span fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-          公開日: {formatDateFromUTC(publishedAt, 'JpMonthDateTime')} / 更新日:{' '}
-          {formatDateFromUTC(revisedAt, 'JpMonthDateTime')}
+    <Box
+      px="8"
+      py="4"
+      rounded="lg"
+      shadow="lg"
+      bg={useColorModeValue("white", "gray.800")}
+    >
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <chakra.span
+          fontSize="sm"
+          color={useColorModeValue("gray.600", "gray.400")}
+        >
+          公開日: {formatDateFromUTC(publishedAt, "JpMonthDateTime")} / 更新日:{" "}
+          {formatDateFromUTC(revisedAt, "JpMonthDateTime")}
         </chakra.span>
         <Link
           px={3}
@@ -29,7 +44,7 @@ export const Summary: React.VFC<Props> = ({
           fontSize="sm"
           fontWeight="700"
           rounded="md"
-          _hover={{ bg: 'gray.500' }}
+          _hover={{ bg: "gray.500" }}
         >
           {category.name}
         </Link>
@@ -39,18 +54,18 @@ export const Summary: React.VFC<Props> = ({
         <NextChakraAnchor
           href={`/articles/${id}`}
           fontSize="2xl"
-          color={useColorModeValue('gray.700', 'white')}
+          color={useColorModeValue("gray.700", "white")}
           fontWeight="700"
           _hover={{
-            color: useColorModeValue('gray.600', 'gray.200'),
-            textDecor: 'underline',
+            color: useColorModeValue("gray.600", "gray.200"),
+            textDecor: "underline",
           }}
         >
           {title}
         </NextChakraAnchor>
         <chakra.p
           mt={2}
-          color={useColorModeValue('gray.600', 'gray.300')}
+          color={useColorModeValue("gray.600", "gray.300")}
           noOfLines={{ base: 4, md: 3 }}
         >
           {summary}
@@ -58,12 +73,12 @@ export const Summary: React.VFC<Props> = ({
       </Box>
 
       <NextChakraAnchor
-        color={useColorModeValue('green.600', 'green.400')}
-        _hover={{ textDecor: 'underline' }}
+        color={useColorModeValue("green.600", "green.400")}
+        _hover={{ textDecor: "underline" }}
         href={`/articles/${id}`}
       >
         Read more
       </NextChakraAnchor>
     </Box>
-  )
-}
+  );
+};

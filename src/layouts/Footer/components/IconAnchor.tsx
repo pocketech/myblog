@@ -1,16 +1,16 @@
-import { useColorModeValue, VisuallyHidden } from '@chakra-ui/react'
+import { useColorModeValue, VisuallyHidden } from "@chakra-ui/react";
 
-import { NextChakraAnchor } from '@/components/NextChakraAnchor'
+import { NextChakraAnchor } from "@/components/NextChakraAnchor";
 
 type Props = {
-  icon: React.ReactElement
-  label: string
-  href: string
-}
+  icon: React.ReactElement;
+  label: string;
+  href: string;
+};
 /**
  * @package
  */
-export const IconAnchor: React.VFC<Props> = ({ icon, label, href }) => {
+export const IconAnchor: React.FC<Props> = ({ icon, label, href }) => {
   return (
     <NextChakraAnchor
       href={href}
@@ -23,11 +23,11 @@ export const IconAnchor: React.VFC<Props> = ({ icon, label, href }) => {
       transition="background .3s ease"
       //
       _hover={{
-        color: useColorModeValue('gray.500', 'gray.400'),
+        color: useColorModeValue("gray.500", "gray.400"),
       }}
     >
       <VisuallyHidden>{label}</VisuallyHidden>
       {icon}
     </NextChakraAnchor>
-  )
-}
+  );
+};

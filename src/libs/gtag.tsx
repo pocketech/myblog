@@ -1,53 +1,53 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useRouter } from 'next/router'
-import Script from 'next/script'
-import { useEffect } from 'react'
+import { useRouter } from "next/router";
+import Script from "next/script";
+import { useEffect } from "react";
 
-export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ''
+export const GA_ID = process.env["NEXT_PUBLIC_GOOGLE_ANALYTICS_ID"] || "";
 
 // IDが取得できない場合を想定する
-export const isExistsGaId = GA_ID !== ''
+export const isExistsGaId = GA_ID !== "";
 
 // PVを測定する
 export const pageview = (path: string) => {
-  window.gtag('config', GA_ID, {
+  window.gtag("config", GA_ID, {
     page_path: path,
-  })
-}
+  });
+};
 
 // GAイベントを発火させる
-export const event = ({ action, category, label, value = '' }: Event) => {
+export const event = ({ action, category, label, value = "" }: Event) => {
   if (!isExistsGaId) {
-    return
+    return;
   }
 
-  window.gtag('event', action, {
+  window.gtag("event", action, {
     event_category: category,
-    event_label: label ? JSON.stringify(label) : '',
+    event_label: label ? JSON.stringify(label) : "",
     value,
-  })
-}
+  });
+};
 
 // _app.tsx で読み込む
 export const usePageView = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (!isExistsGaId) {
-      return
+      return;
     }
 
     const handleRouteChange = (path: string) => {
-      pageview(path)
-    }
+      pageview(path);
+    };
 
-    router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on("routeChangeComplete", handleRouteChange);
 
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
-}
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+};
 
 // _app.tsx で読み込む
 export const GoogleAnalytics = () => (
@@ -74,20 +74,20 @@ export const GoogleAnalytics = () => (
       </>
     )}
   </>
-)
+);
 
 // イベントを型で管理
 type ContactEvent = {
-  action: 'submit_form'
-  category: 'contact'
-}
+  action: "submit_form";
+  category: "contact";
+};
 
 type ClickEvent = {
-  action: 'click'
-  category: 'other'
-}
+  action: "click";
+  category: "other";
+};
 
 export type Event = (ContactEvent | ClickEvent) & {
-  label?: Record<string, string | number | boolean>
-  value?: string
-}
+  label?: Record<string, string | number | boolean>;
+  value?: string;
+};

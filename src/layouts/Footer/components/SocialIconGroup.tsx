@@ -1,44 +1,59 @@
-import { Stack } from '@chakra-ui/react'
-import { FaDribbble, FaFacebook, FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { Stack } from "@chakra-ui/react";
+import {
+  FaDribbble,
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaTwitter,
+} from "react-icons/fa";
 
-import { IconAnchor } from './IconAnchor'
+import { IconAnchor } from "./IconAnchor";
 
 const items = [
   {
-    label: 'Facebook',
+    label: "Facebook",
     icon: <FaFacebook />,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Instagram',
+    label: "Instagram",
     icon: <FaInstagram />,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Twitter',
+    label: "Twitter",
     icon: <FaTwitter />,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Github',
+    label: "Github",
     icon: <FaGithub />,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Dribble',
+    label: "Dribble",
     icon: <FaDribbble />,
-    href: '#',
+    href: "#",
   },
-]
+];
 /**
  * @package
  */
-export const SocialIconGroup: React.VFC = () => {
+export const SocialIconGroup: React.FC = () => {
   return (
-    <Stack direction="row" spacing={6} fontSize={20}>
+    <Stack
+      direction="row"
+      spacing={6}
+      fontSize={20}
+    >
       {items.map((item) => (
-        <IconAnchor label={item.label} href={item.href} icon={item.icon} key={item.label} />
+        <IconAnchor
+          label={item.label}
+          href={item.href}
+          icon={item.icon}
+          key={item.label}
+        />
       ))}
     </Stack>
-  )
-}
+  );
+};

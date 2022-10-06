@@ -1,11 +1,13 @@
-import type { CSSObject } from '@chakra-ui/react'
-import type { GlobalStyleProps } from '@chakra-ui/theme-tools'
+import type {
+  GlobalStyleProps,
+  SystemStyleObject,
+} from "@chakra-ui/theme-tools";
 
 // propsはカラーモードでスタイルを変えたいときに使用する。
-export const global = (_props: GlobalStyleProps): CSSObject => {
+export const global = (_props: GlobalStyleProps): SystemStyleObject => {
   return {
     body: {
-      textColor: 'gray.900',
+      textColor: "gray.900",
     },
-  }
-}
+  };
+};

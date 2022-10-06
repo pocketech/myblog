@@ -1,11 +1,20 @@
-import type { BoxProps } from '@chakra-ui/react'
-import { chakra } from '@chakra-ui/react'
+import type { BoxProps } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
 
-type Props = BoxProps
+type Props = BoxProps;
 
-export const Logo: React.VFC<Props> = ({ width = 'xs', color = 'black', ...others }) => {
+export const Logo: React.FC<Props> = ({
+  width = "xs",
+  color = "black",
+  ...others
+}) => {
   return (
-    <chakra.figure display="inline-block" width={width} color={color} {...others}>
+    <chakra.figure
+      display="inline-block"
+      width={width}
+      color={color}
+      {...others}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -33,5 +42,5 @@ export const Logo: React.VFC<Props> = ({ width = 'xs', color = 'black', ...other
         </g>
       </svg>
     </chakra.figure>
-  )
-}
+  );
+};
