@@ -1,4 +1,2 @@
-**/node_modules/*
-**/out/*
-**/.next/*
-/.eslintrc.js
+/src/libs/$path.ts
+next-env.d.ts
