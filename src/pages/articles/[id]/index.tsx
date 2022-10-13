@@ -6,11 +6,11 @@ import type {
 } from "next";
 
 import { Head } from "@/components/Head";
-import { useOpenGraphImage } from "@/components/Head/useOpenGraphImage";
 import type { Article } from "@/features/article";
 import { Detail } from "@/features/article/components/Detail";
 import { BaseLayout } from "@/layouts/BaseLayout";
 import { client } from "@/libs/client";
+import { getAbsoluteURL } from "@/utils/getAbsoluteURL";
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -41,13 +41,17 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 const Page: NextPageWithLayout<Props> = ({ article }) => {
-  const { imageURL } = useOpenGraphImage();
+  const searchParams = new URLSearchParams();
+  searchParams.set("title", article.title);
+  searchParams.set("description", article.body);
+
+  const imageUrl = getAbsoluteURL(`/og?${searchParams.toString()}`);
   return (
     <>
       <Head
         ogTitle={article.title}
         ogDescription={article.body}
-        ogImageUrl={imageURL}
+        ogImageUrl={imageUrl}
       />
       <Detail article={article} />
     </>
