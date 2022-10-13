@@ -3,3 +3,4 @@ yarn.lock
 package-lock.json
 public
 .vscode
+src/libs/$path.ts
